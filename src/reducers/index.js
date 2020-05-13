@@ -1,4 +1,4 @@
-export const initialState = {
+const initialState = {
   additionalPrice: 0,
   car: {
     price: 26395,
@@ -16,6 +16,7 @@ export const initialState = {
 };
 
 export const reducer = (state = initialState, action) => {
+  console.log('ran')
   switch (action.type) {
     case "ADD_FEATURE":
       return {
@@ -30,10 +31,10 @@ export const reducer = (state = initialState, action) => {
     case "REMOVE_FEATURE":
       return {
         ...state,
-        additionalPrice: state.additionalPrice - action.payload,
+        additionalPrice: state.additionalPrice - action.payload.price,
         car: {
           ...state.car,
-          features: state.car.features.filter(item => item.id !== action.payload.id)
+          features: state.car.features.filter(feature => feature.id !== action.payload.id)
         },
         additionalFeatures: [...state.additionalFeatures, action.payload]
       };
